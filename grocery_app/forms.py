@@ -15,12 +15,10 @@ class GroceryStoreForm(FlaskForm):
 
 class GroceryItemForm(FlaskForm):
     """Form for adding/updating a GroceryItem."""
-
-    # TODO: Add the following fields to the form class:
-    # - name - StringField
-    # - price - FloatField
-    # - category - SelectField (specify the 'choices' param)
-    # - photo_url - StringField (use a URL validator)
-    # - store - QuerySelectField (specify the `query_factory` param)
-    # - submit button
-    pass
+    name = StringField('name of Item', validators=[
+                       DataRequired(), Length(min=1, max=80)])
+    price = FloatField('price of Item')
+    category = SelectField('category', choices=ItemCategory.choices())
+    photo_url = StringField('photo of item', validators=[require_tld=True, message=None])
+    store = QuerySelectField('store', query_factory=lamda: GroceryStore.query)
+    submit = SubmitField('Submit')
