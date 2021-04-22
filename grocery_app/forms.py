@@ -3,14 +3,15 @@ from wtforms import StringField, DateField, SelectField, SubmitField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, URL
 
+
 class GroceryStoreForm(FlaskForm):
     """Form for adding/updating a GroceryStore."""
+    title = StringField('name', validators=[
+                        DataRequired(), Length(min=3, max=80)])
+    address = StringField('address', validators=[
+                          DataRequired(), Length(min=3, max=80)])
+    submit = SubmitField('Submit')
 
-    # TODO: Add the following fields to the form class:
-    # - title - StringField
-    # - address - StringField
-    # - submit button
-    pass
 
 class GroceryItemForm(FlaskForm):
     """Form for adding/updating a GroceryItem."""
