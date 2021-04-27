@@ -76,16 +76,14 @@ def item_detail(item_id):
     item = GroceryItem.query.get(item_id)
     form = GroceryItemForm(obj=item)
     if form.validate_on_submit():
-        updated_item = GroceryItem(
-            name=form.name.data, 
-            price=form.price.data, 
-            category=form.category.data,
-            photo_url=form.photo_url.data,
-            store= form.store.data
-            )
-        db.session.add(updated_item)
+        item.name=form.name.data, 
+        item.price=form.price.data, 
+        item.category=form.category.data,
+        item.photo_url=form.photo_url.data,
+        item.store= form.store.data
+        db.session.add(item)
         db.session.commit()
         flash('Item has been updated!')
-        return redirect(url_for('main.item_detail', item_id=item.id, item=updated_item))
+        return redirect(url_for('main.item_detail', item_id=item.id, item=item))
     return render_template('item_detail.html', item=item, form=form)
 
