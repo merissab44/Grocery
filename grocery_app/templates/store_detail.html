@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Store - {{ form.title.data }}</h1>
+<h1>Store - {{ store.title }}</h1>
 
-<strong>Address:</strong> {{ form.address.data }}
+<h2>Address:</strong> {{ store.address }}</h2>
+
+<h2>Created By:</strong> {{ current_user.username }}</h2>
 
 <h2>Items</h2>
 
@@ -20,18 +22,17 @@
 
 <h2>Edit Store</h2>
 
-<form action="{{ url_for('main.store_detail', store_id=store.id)}}" method="POST">
+<form method="POST" action="{{ url_for('main.store_detail', store_id=store.id) }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Please enter your information:</legend>
+        {{ form.title.label }}
+        {{ form.title }}
 
-            {{ form.title.label }}
-            {{ form.title }}
+        {{ form.address.label }}
+        {{ form.address }}
 
-            {{ form.address.label}}
-            {{ form.address }}
-
-            {{ form.submit }}
+        {{ form.submit }}
     </fieldset>
 </form>
 
